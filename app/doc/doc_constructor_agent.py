@@ -62,7 +62,29 @@ def parse_markdown_table(table_md):
     data_rows = rows[1:]
     return colnames, data_rows
 
-# This is your robust extractor for the flow diagram agent:
+def parse_pseudomarkdown_table(table_txt):
+    """
+    Handles table-like text with columns separated by | but missing markdown headers and dividers.
+    Returns colnames, data_rows or (None, None) if not matching.
+    """
+    # Split into lines, skip empty lines
+    lines = [line.strip() for line in table_txt.strip().splitlines() if line.strip()]
+    # Must have at least 2 lines (header, one row)
+    if len(lines) < 2:
+        return None, None
+    # All lines need at least 2 columns, separated by |
+    if not all('|' in l for l in lines):
+        return None, None
+    # No line should start or end with | (then it's markdown)
+    if all(not l.startswith('|') and not l.endswith('|') for l in lines):
+        rows = [[cell.strip() for cell in l.split('|')] for l in lines]
+        colnames = rows[0]
+        data_rows = rows[1:]
+        # All rows should have the same number of columns as header
+        if all(len(r) == len(colnames) for r in data_rows):
+            return colnames, data_rows
+    return None, None
+
 def extract_arrow_flow(text):
     if not text:
         return ""
@@ -114,6 +136,9 @@ def build_document(content, sections, flow_diagram_agent=None, diagram_dir="diag
                     doc.add_paragraph(value)
             elif typ == 'table':
                 colnames, rows = parse_markdown_table(value)
+                # If NOT a markdown table, try pseudomarkdown table
+                if not (colnames and rows):
+                    colnames, rows = parse_pseudomarkdown_table(value)
                 if colnames and rows:
                     add_table(doc, colnames, rows)
                 else:
