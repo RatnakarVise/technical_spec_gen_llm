@@ -56,7 +56,7 @@ SECTION_BUNDLES = [
     (["Detailed Logic Block Descriptions"], ['pgm_name', 'type', 'explanation']),
     (["Output Details"], ['pgm_name', 'type', 'explanation']),
     (["Data Declarations & SAP Tables Used", "Enhancements & Modifications", "Error Handling & Logging", "Performance Considerations", "Security & Authorizations"], [ 'selectionscreen', 'declarations', 'explanation']),
-    (["Testing (Unit & Scenario)"], [ 'selectionscreen', 'declarations', 'explanation']),
+    (["Test Scenario"], [ 'selectionscreen', 'declarations', 'explanation']),
     (["Flow Diagram"],[ 'selectionscreen', 'declarations', 'explanation']),
     (["Transport Management"], ['transport']),
     (["Sign-Off"], []),
@@ -131,7 +131,7 @@ class ContentWriterAgent:
         batched_prompt += "- Strictly follow its 'BIBLE' (authoritative knowledge) shown for that section\n"
         batched_prompt += "- Use ONLY the information in the provided payload JSON\n"
         batched_prompt += "- For each section, output as:\n<<START:{Section Name}>>\n<content>\n<<END:{Section Name}>>\n\n"
-
+        batched_prompt += "Important: You must output every section, even if the content is empty or you have no information. Do NOT skip any sections.\n"
         batched_prompt += f"\nThe relevant context (payload) for all these sections is:\n```json\n{context_json}\n```\n"
 
         for idx, s in enumerate(section_names):

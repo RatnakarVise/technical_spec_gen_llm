@@ -86,7 +86,7 @@ description: Summary Table of SAP authorization objects, authority-check stateme
 fields: [Object/Check Type, Name, Check Logic/Location, Description]
 prompt: List all SAP authorization objects, authority-check statements, and any required user roles or profiles in table.Use provided values from payload(explanation) or [None] if missing.
 
-#Testing (Unit & Scenario)
+#Test Scenario
 type: table
 description: Table of test plan coverage/scenarios, input data, expected outputs, status.
 fields:[Test Case, Objective, Input Data, Expected Output, Actual Result/Status, Sign-off/Comments]
