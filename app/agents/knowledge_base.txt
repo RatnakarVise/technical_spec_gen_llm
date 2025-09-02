@@ -46,13 +46,13 @@ prompt: Carefully analyze the payload(selectionscreen) and List all UI/screen fi
 #Processing Logic & Control Flow
 type: text
 description: High-level, stepwise narrative of program flow and key processing stages, based strictly on the implemented code (do not infer unimplemented or generic behaviors).
-prompt: Carefully analyze the provided payload(explanation) and describe the main program steps and the flow of control, including key processing stages, major conditionals (IF/CASE statements), and iterations (loops). Only include logic that is explicitly present in the payload explanation and omit any general or assumed SAP behavior. Present the explanation as a clear, sequential, step-by-step or bullet-point, reflecting the actual implemented logic found in payload explanation.
+prompt: Carefully analyze the provided payload(pgm_name, type, explanation) and describe the main program steps and the flow of control, including key processing stages, major conditionals (IF/CASE statements), and iterations (loops). Only include logic that is explicitly present in the payload explanation and omit any general or assumed SAP behavior. Present the explanation as a clear, sequential, step-by-step or bullet-point, reflecting the actual implemented logic found in payload explanation.
 
 #Logic Block Summary
 type: table
 description: Tabular summary of logic blocks (PERFORMs/methods/FMs): parameters, functions, calls.
 fields: [Block Name, Type, Purpose, Input Params, Output Params, Calls Made, Description]
-prompt: Present the results strictly as a table with the columns: Block Name, Type, Purpose, Input Params, Output Params, Calls Made, Description. Carefully analyze the provided payload(explanation) For each logic block, summarize name, type, purpose, params, and calls.
+prompt: Present the results strictly as a table with the columns: Block Name, Type, Purpose, Input Params, Output Params, Calls Made, Description. Carefully analyze the provided payload(pgm_name, type, explanation) For each logic block, summarize name, type, purpose, params, and calls.
 
 #Detailed Logic Block Descriptions
 type: text
